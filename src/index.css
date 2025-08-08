@@ -38,13 +38,13 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* CRM Design System */
-    --crm-primary: 217 91% 60%;
+    /* CRM Design System - Roxinho claro e azul */
+    --crm-primary: 258 90% 66%;
     --crm-primary-foreground: 0 0% 98%;
-    --crm-primary-hover: 217 91% 55%;
+    --crm-primary-hover: 258 90% 60%;
     
-    --crm-secondary: 213 27% 84%;
-    --crm-secondary-foreground: 222.2 47.4% 11.2%;
+    --crm-secondary: 252 56% 88%;
+    --crm-secondary-foreground: 258 25% 25%;
     
     --crm-success: 142 76% 36%;
     --crm-success-foreground: 0 0% 98%;
@@ -55,19 +55,19 @@ All colors MUST be HSL.
     --crm-danger: 0 84% 60%;
     --crm-danger-foreground: 0 0% 98%;
     
-    --crm-info: 199 89% 48%;
+    --crm-info: 217 91% 60%;
     --crm-info-foreground: 0 0% 98%;
     
-    --crm-sidebar: 222.2 84% 4.9%;
-    --crm-sidebar-foreground: 210 40% 98%;
-    --crm-sidebar-accent: 215 28% 17%;
+    --crm-sidebar: 258 25% 15%;
+    --crm-sidebar-foreground: 252 56% 95%;
+    --crm-sidebar-accent: 258 25% 22%;
     
-    --crm-gradient-primary: linear-gradient(135deg, hsl(var(--crm-primary)), hsl(217 91% 45%));
-    --crm-gradient-secondary: linear-gradient(135deg, hsl(var(--crm-secondary)), hsl(213 27% 78%));
+    --crm-gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(217 91% 60%));
+    --crm-gradient-secondary: linear-gradient(135deg, hsl(252 56% 88%), hsl(217 67% 85%));
     
-    --crm-shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --crm-shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --crm-shadow-large: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --crm-shadow-soft: 0 1px 3px 0 rgb(147 51 234 / 0.1), 0 1px 2px -1px rgb(147 51 234 / 0.1);
+    --crm-shadow-medium: 0 4px 6px -1px rgb(147 51 234 / 0.1), 0 2px 4px -2px rgb(147 51 234 / 0.1);
+    --crm-shadow-large: 0 10px 15px -3px rgb(147 51 234 / 0.1), 0 4px 6px -4px rgb(147 51 234 / 0.1);
     
     --crm-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
