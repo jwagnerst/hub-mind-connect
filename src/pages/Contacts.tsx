@@ -10,9 +10,11 @@ import {
   Phone, 
   Mail, 
   Building2, 
-  MessageSquare,
-  Send,
-  MoreVertical
+  MapPin,
+  Calendar,
+  MoreVertical,
+  Edit,
+  Trash2
 } from "lucide-react";
 
 const contacts = [
@@ -24,8 +26,10 @@ const contacts = [
     company: "Tech Corp",
     position: "CTO",
     status: "Active",
+    location: "New York, NY",
     lastContact: "2 days ago",
-    avatar: "JS"
+    avatar: "JS",
+    notes: "Interested in enterprise solution. Follow up needed on pricing."
   },
   {
     id: 2,
@@ -35,8 +39,10 @@ const contacts = [
     company: "Marketing Inc",
     position: "Marketing Director",
     status: "Active",
+    location: "Los Angeles, CA",
     lastContact: "1 week ago",
-    avatar: "SJ"
+    avatar: "SJ",
+    notes: "Potential partnership opportunity. Scheduled for next month."
   },
   {
     id: 3,
@@ -46,85 +52,68 @@ const contacts = [
     company: "RetailCo",
     position: "VP Sales",
     status: "Inactive",
+    location: "Chicago, IL",
     lastContact: "2 weeks ago",
-    avatar: "MW"
-  }
-];
-
-const conversations = [
-  {
-    id: 1,
-    sender: "John Smith",
-    message: "Thanks for the proposal. Can we schedule a call to discuss pricing?",
-    time: "10:30 AM",
-    type: "received"
+    avatar: "MW",
+    notes: "Lost contact. Attempt re-engagement."
   },
   {
-    id: 2,
-    sender: "You",
-    message: "Absolutely! I'm available tomorrow afternoon. What time works best for you?",
-    time: "10:45 AM", 
-    type: "sent"
-  },
-  {
-    id: 3,
-    sender: "John Smith",
-    message: "How about 2 PM EST? I'll send a calendar invite.",
-    time: "11:00 AM",
-    type: "received"
+    id: 4,
+    name: "Emily Davis",
+    email: "emily.davis@startup.io",
+    phone: "+1 (555) 321-9876",
+    company: "StartupIO",
+    position: "CEO",
+    status: "Active",
+    location: "San Francisco, CA",
+    lastContact: "3 days ago",
+    avatar: "ED",
+    notes: "High-priority contact. Interested in custom implementation."
   }
 ];
 
 export default function Contacts() {
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [newMessage, setNewMessage] = useState("");
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    contact.company.toLowerCase().includes(searchTerm.toLowerCase())
+    contact.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    contact.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleSendMessage = () => {
-    if (newMessage.trim()) {
-      // In a real app, this would send the message
-      console.log("Sending message:", newMessage);
-      setNewMessage("");
-    }
-  };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Contacts</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Contatos</h1>
           <p className="text-muted-foreground">
-            Manage your contacts and conversations
+            Gerencie seus contatos e informações
           </p>
         </div>
         <Button className="bg-crm-primary hover:bg-crm-primary-hover text-crm-primary-foreground">
           <Plus className="mr-2 h-4 w-4" />
-          New Contact
+          Novo Contato
         </Button>
       </div>
 
       <div className="grid grid-cols-12 gap-6 h-[calc(100vh-200px)]">
-        {/* Contacts List */}
-        <div className="col-span-4">
+        {/* Lista de Contatos */}
+        <div className="col-span-5">
           <Card className="h-full">
             <CardHeader>
-              <CardTitle className="text-lg">All Contacts</CardTitle>
+              <CardTitle className="text-lg">Todos os Contatos</CardTitle>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={16} />
                 <Input
-                  placeholder="Search contacts..."
+                  placeholder="Buscar contatos..."
                   className="pl-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
             </CardHeader>
-            <CardContent className="space-y-2 overflow-y-auto max-h-[500px]">
+            <CardContent className="space-y-3 overflow-y-auto max-h-[600px]">
               {filteredContacts.map((contact) => (
                 <Card
                   key={contact.id}
@@ -134,13 +123,14 @@ export default function Contacts() {
                   onClick={() => setSelectedContact(contact)}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-crm-primary text-crm-primary-foreground rounded-full flex items-center justify-center font-medium">
+                    <div className="w-12 h-12 bg-crm-primary text-crm-primary-foreground rounded-full flex items-center justify-center font-medium">
                       {contact.avatar}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm truncate">{contact.name}</p>
+                      <p className="font-semibold text-sm truncate">{contact.name}</p>
+                      <p className="text-xs text-muted-foreground truncate">{contact.position}</p>
                       <p className="text-xs text-muted-foreground truncate">{contact.company}</p>
-                      <div className="flex items-center gap-2 mt-1">
+                      <div className="flex items-center gap-2 mt-2">
                         <Badge 
                           variant={contact.status === "Active" ? "default" : "secondary"}
                           className="text-xs"
@@ -157,107 +147,127 @@ export default function Contacts() {
           </Card>
         </div>
 
-        {/* Contact Details & Conversation */}
-        <div className="col-span-8">
-          <div className="grid grid-rows-[auto_1fr] gap-6 h-full">
-            {/* Contact Details */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-crm-primary text-crm-primary-foreground rounded-full flex items-center justify-center font-medium text-lg">
-                      {selectedContact.avatar}
-                    </div>
-                    <div>
-                      <h2 className="text-xl font-semibold">{selectedContact.name}</h2>
-                      <p className="text-muted-foreground">{selectedContact.position} at {selectedContact.company}</p>
-                    </div>
+        {/* Detalhes do Contato */}
+        <div className="col-span-7">
+          <Card className="h-full">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-16 bg-crm-primary text-crm-primary-foreground rounded-full flex items-center justify-center font-medium text-xl">
+                    {selectedContact.avatar}
                   </div>
-                  <Button variant="ghost" size="sm">
-                    <MoreVertical size={16} />
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="flex items-center space-x-2">
-                    <Mail className="h-4 w-4 text-crm-primary" />
-                    <span className="text-sm">{selectedContact.email}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Phone className="h-4 w-4 text-crm-primary" />
-                    <span className="text-sm">{selectedContact.phone}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Building2 className="h-4 w-4 text-crm-primary" />
-                    <span className="text-sm">{selectedContact.company}</span>
+                  <div>
+                    <h2 className="text-2xl font-bold">{selectedContact.name}</h2>
+                    <p className="text-muted-foreground text-lg">{selectedContact.position}</p>
+                    <p className="text-muted-foreground">{selectedContact.company}</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Conversation Section */}
-            <Card className="flex flex-col">
-              <CardHeader className="flex-shrink-0">
-                <CardTitle className="flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-crm-primary" />
-                  Conversation
-                  <Badge variant="outline" className="ml-auto">
-                    WhatsApp Integration Coming Soon
-                  </Badge>
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="flex-1 flex flex-col">
-                {/* Messages */}
-                <div className="flex-1 space-y-3 overflow-y-auto mb-4 max-h-80">
-                  {conversations.map((msg) => (
-                    <div
-                      key={msg.id}
-                      className={`flex ${msg.type === "sent" ? "justify-end" : "justify-start"}`}
-                    >
-                      <div
-                        className={`max-w-[70%] p-3 rounded-lg ${
-                          msg.type === "sent"
-                            ? "bg-crm-primary text-crm-primary-foreground"
-                            : "bg-muted"
-                        }`}
-                      >
-                        {msg.type === "received" && (
-                          <p className="text-xs font-medium mb-1">{msg.sender}</p>
-                        )}
-                        <p className="text-sm">{msg.message}</p>
-                        <p className={`text-xs mt-1 ${
-                          msg.type === "sent" ? "text-crm-primary-foreground/70" : "text-muted-foreground"
-                        }`}>
-                          {msg.time}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <Separator className="my-4" />
-
-                {/* Message Input */}
                 <div className="flex gap-2">
-                  <Input
-                    placeholder="Type your message..."
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                    className="flex-1"
-                  />
-                  <Button 
-                    onClick={handleSendMessage}
-                    className="bg-crm-primary hover:bg-crm-primary-hover text-crm-primary-foreground"
-                  >
-                    <Send size={16} />
+                  <Button variant="outline" size="sm">
+                    <Edit className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    <MoreVertical className="h-4 w-4" />
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardHeader>
+            
+            <CardContent className="space-y-6">
+              {/* Informações de Contato */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Informações de Contato</h3>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="flex items-center space-x-3 p-3 bg-muted/50 rounded-lg">
+                    <Mail className="h-5 w-5 text-crm-primary" />
+                    <div>
+                      <p className="text-sm font-medium">Email</p>
+                      <p className="text-sm text-muted-foreground">{selectedContact.email}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3 p-3 bg-muted/50 rounded-lg">
+                    <Phone className="h-5 w-5 text-crm-primary" />
+                    <div>
+                      <p className="text-sm font-medium">Telefone</p>
+                      <p className="text-sm text-muted-foreground">{selectedContact.phone}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3 p-3 bg-muted/50 rounded-lg">
+                    <Building2 className="h-5 w-5 text-crm-primary" />
+                    <div>
+                      <p className="text-sm font-medium">Empresa</p>
+                      <p className="text-sm text-muted-foreground">{selectedContact.company}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3 p-3 bg-muted/50 rounded-lg">
+                    <MapPin className="h-5 w-5 text-crm-primary" />
+                    <div>
+                      <p className="text-sm font-medium">Localização</p>
+                      <p className="text-sm text-muted-foreground">{selectedContact.location}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-3 p-3 bg-muted/50 rounded-lg">
+                    <Calendar className="h-5 w-5 text-crm-primary" />
+                    <div>
+                      <p className="text-sm font-medium">Último Contato</p>
+                      <p className="text-sm text-muted-foreground">{selectedContact.lastContact}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Status e Notas */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Status e Notas</h3>
+                
+                <div className="flex items-center gap-4">
+                  <div>
+                    <p className="text-sm font-medium mb-1">Status</p>
+                    <Badge 
+                      variant={selectedContact.status === "Active" ? "default" : "secondary"}
+                      className="text-sm"
+                    >
+                      {selectedContact.status}
+                    </Badge>
+                  </div>
+                </div>
+                
+                <div>
+                  <p className="text-sm font-medium mb-2">Notas</p>
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <p className="text-sm text-muted-foreground">{selectedContact.notes}</p>
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Ações */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Ações Rápidas</h3>
+                <div className="flex gap-2">
+                  <Button className="bg-crm-primary hover:bg-crm-primary-hover text-crm-primary-foreground">
+                    <Mail className="mr-2 h-4 w-4" />
+                    Enviar Email
+                  </Button>
+                  <Button variant="outline">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Ligar
+                  </Button>
+                  <Button variant="outline">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Agendar
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

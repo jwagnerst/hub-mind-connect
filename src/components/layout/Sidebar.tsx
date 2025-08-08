@@ -16,9 +16,10 @@ import {
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "Leads", href: "/leads", icon: Target },
-  { name: "Contacts", href: "/contacts", icon: Users },
+  { name: "Contatos", href: "/contacts", icon: Users },
+  { name: "Conversas", href: "/conversations", icon: MessageSquare },
   { name: "Accounts", href: "/accounts", icon: Building2 },
-  { name: "Opportunities", href: "/opportunities", icon: MessageSquare },
+  { name: "Opportunities", href: "/opportunities", icon: Target },
 ];
 
 export default function Sidebar() {
