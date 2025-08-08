@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 248 250 252;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -36,7 +36,40 @@ All colors MUST be HSL.
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* CRM Design System */
+    --crm-primary: 217 91% 60%;
+    --crm-primary-foreground: 0 0% 98%;
+    --crm-primary-hover: 217 91% 55%;
+    
+    --crm-secondary: 213 27% 84%;
+    --crm-secondary-foreground: 222.2 47.4% 11.2%;
+    
+    --crm-success: 142 76% 36%;
+    --crm-success-foreground: 0 0% 98%;
+    
+    --crm-warning: 38 92% 50%;
+    --crm-warning-foreground: 0 0% 98%;
+    
+    --crm-danger: 0 84% 60%;
+    --crm-danger-foreground: 0 0% 98%;
+    
+    --crm-info: 199 89% 48%;
+    --crm-info-foreground: 0 0% 98%;
+    
+    --crm-sidebar: 222.2 84% 4.9%;
+    --crm-sidebar-foreground: 210 40% 98%;
+    --crm-sidebar-accent: 215 28% 17%;
+    
+    --crm-gradient-primary: linear-gradient(135deg, hsl(var(--crm-primary)), hsl(217 91% 45%));
+    --crm-gradient-secondary: linear-gradient(135deg, hsl(var(--crm-secondary)), hsl(213 27% 78%));
+    
+    --crm-shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --crm-shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --crm-shadow-large: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    --crm-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 

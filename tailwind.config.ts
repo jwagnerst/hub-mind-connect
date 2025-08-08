@@ -52,6 +52,37 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// CRM Color System
+				'crm-primary': {
+					DEFAULT: 'hsl(var(--crm-primary))',
+					foreground: 'hsl(var(--crm-primary-foreground))',
+					hover: 'hsl(var(--crm-primary-hover))'
+				},
+				'crm-secondary': {
+					DEFAULT: 'hsl(var(--crm-secondary))',
+					foreground: 'hsl(var(--crm-secondary-foreground))'
+				},
+				'crm-success': {
+					DEFAULT: 'hsl(var(--crm-success))',
+					foreground: 'hsl(var(--crm-success-foreground))'
+				},
+				'crm-warning': {
+					DEFAULT: 'hsl(var(--crm-warning))',
+					foreground: 'hsl(var(--crm-warning-foreground))'
+				},
+				'crm-danger': {
+					DEFAULT: 'hsl(var(--crm-danger))',
+					foreground: 'hsl(var(--crm-danger-foreground))'
+				},
+				'crm-info': {
+					DEFAULT: 'hsl(var(--crm-info))',
+					foreground: 'hsl(var(--crm-info-foreground))'
+				},
+				'crm-sidebar': {
+					DEFAULT: 'hsl(var(--crm-sidebar))',
+					foreground: 'hsl(var(--crm-sidebar-foreground))',
+					accent: 'hsl(var(--crm-sidebar-accent))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
