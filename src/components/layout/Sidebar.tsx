@@ -37,7 +37,7 @@ export default function Sidebar() {
         <div className="flex items-center justify-between">
           {!collapsed && (
             <h1 className="text-xl font-bold bg-gradient-to-r from-crm-primary to-crm-info bg-clip-text text-transparent">
-              CRM Pro
+              OUTSET CRM
             </h1>
           )}
           <Button
